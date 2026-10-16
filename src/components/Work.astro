@@ -10,10 +10,16 @@ const t = useTranslations(lang);
 
 const youtubeVideos = [
   {
+    id: 'rFMCqmxn7xk',
+    url: 'https://youtu.be/rFMCqmxn7xk',
+    thumb: 'https://i.ytimg.com/vi/rFMCqmxn7xk/maxresdefault.jpg',
+    title: 'Video 1',
+  },
+  {
     id: '7n7Ybm5I1Jg',
     url: 'https://youtu.be/7n7Ybm5I1Jg',
     thumb: 'https://i.ytimg.com/vi/7n7Ybm5I1Jg/maxresdefault.jpg',
-    title: 'Video 1',
+    title: 'Video 2',
   },
   {
     id: 'VFmGtqPxqWk',
@@ -64,33 +70,38 @@ const tiktokVideos = [
 
     <!-- YouTube grid: 2 columns like Joey cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-      {youtubeVideos.map((video, i) => (
-        <a
-          href={video.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group relative aspect-video rounded-[32px] overflow-hidden bg-[var(--bg-card)]"
+      {youtubeVideos.map((video) => (
+        <div
+          class="yt-card group relative aspect-video rounded-[32px] overflow-hidden bg-[var(--bg-card)] cursor-pointer"
+          data-id={video.id}
         >
-          <img
-            src={video.thumb}
-            alt={video.title}
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            loading="lazy"
-          />
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
-
-          <!-- Bottom label row -->
-          <div class="absolute bottom-0 left-0 right-0 p-6 flex items-center justify-between">
-            <span class="text-white text-base font-semibold opacity-80">
-              {t('work.viewOnYoutube')}
-            </span>
-            <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/40 transition-colors">
-              <svg width="14" height="14" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/>
-              </svg>
+          <!-- Thumbnail -->
+          <div class="yt-thumb absolute inset-0">
+            <img
+              src={video.thumb}
+              alt={video.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+            <!-- Play button -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/40 transition-colors">
+                <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
             </div>
           </div>
-        </a>
+          <!-- iframe (hidden until click) -->
+          <iframe
+            class="yt-iframe absolute inset-0 w-full h-full hidden"
+            src=""
+            data-src={`https://www.youtube.com/embed/${video.id}?autoplay=1`}
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+          ></iframe>
+        </div>
       ))}
     </div>
 
@@ -119,3 +130,17 @@ const tiktokVideos = [
 
   </div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.yt-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const thumb = card.querySelector<HTMLElement>('.yt-thumb');
+      const iframe = card.querySelector<HTMLIFrameElement>('.yt-iframe');
+      if (!iframe || !thumb) return;
+      // Set src and show iframe
+      iframe.src = iframe.dataset.src || '';
+      thumb.classList.add('hidden');
+      iframe.classList.remove('hidden');
+    });
+  });
+</script>
