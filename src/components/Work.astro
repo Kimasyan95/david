@@ -1,0 +1,129 @@
+---
+import { useTranslations, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const youtubeVideos = [
+  {
+    id: '7n7Ybm5I1Jg',
+    url: 'https://youtu.be/7n7Ybm5I1Jg',
+    thumb: 'https://i.ytimg.com/vi/7n7Ybm5I1Jg/maxresdefault.jpg',
+  },
+  {
+    id: 'VFmGtqPxqWk',
+    url: 'https://youtu.be/VFmGtqPxqWk',
+    thumb: 'https://i.ytimg.com/vi/VFmGtqPxqWk/maxresdefault.jpg',
+  },
+  {
+    id: '_tp9Le1Ym1U',
+    url: 'https://youtu.be/_tp9Le1Ym1U',
+    thumb: 'https://i.ytimg.com/vi/_tp9Le1Ym1U/maxresdefault.jpg',
+  },
+  {
+    id: '9wJwxw5u3V8',
+    url: 'https://youtu.be/9wJwxw5u3V8',
+    thumb: 'https://i.ytimg.com/vi/9wJwxw5u3V8/maxresdefault.jpg',
+  },
+];
+
+const tiktokVideos = [
+  {
+    url: 'https://vt.tiktok.com/ZSb7CKPgN/',
+    label: 'TikTok 1',
+  },
+  {
+    url: 'https://vt.tiktok.com/ZSb7QtjKj/',
+    label: 'TikTok 2',
+  },
+];
+---
+
+<section id="work" class="py-24 md:py-36 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Section label -->
+    <div class="flex items-center gap-3 mb-16">
+      <span class="text-[#c8f65d] text-sm font-mono uppercase tracking-widest">03</span>
+      <span class="w-12 h-px bg-[#c8f65d]/50"></span>
+      <span class="text-white/40 text-sm uppercase tracking-widest">{t('work.title')}</span>
+    </div>
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+      <h2 class="text-4xl md:text-5xl font-black text-white leading-tight">
+        {t('work.subtitle')}
+      </h2>
+    </div>
+
+    <!-- YouTube section -->
+    <div class="mb-16">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          {t('work.youtube')}
+        </span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {youtubeVideos.map((video) => (
+          <a
+            href={video.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative aspect-video rounded-2xl overflow-hidden border border-white/10 hover:border-[#c8f65d]/40 transition-all duration-300 hover:scale-[1.02]"
+          >
+            <img
+              src={video.thumb}
+              alt="YouTube video"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300"></div>
+            <!-- Play button -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
+                <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            <!-- Label -->
+            <div class="absolute bottom-3 left-3 right-3">
+              <span class="text-white text-xs font-medium bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full">
+                {t('work.viewOnYoutube')}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- TikTok section -->
+    <div>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="bg-black border border-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          {t('work.tiktok')}
+        </span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg">
+        {tiktokVideos.map((video) => (
+          <a
+            href={video.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative aspect-[9/16] max-h-80 rounded-2xl overflow-hidden border border-white/10 hover:border-[#c8f65d]/40 transition-all duration-300 hover:scale-[1.02] bg-gradient-to-br from-[#111] to-[#1a1a1a] flex flex-col items-center justify-center"
+          >
+            <div class="w-16 h-16 border-2 border-white/20 rounded-full flex items-center justify-center group-hover:border-white/50 transition-colors duration-200 mb-4">
+              <svg width="28" height="28" fill="white" viewBox="0 0 24 24">
+                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.54V6.79a4.85 4.85 0 01-1.02-.1z"/>
+              </svg>
+            </div>
+            <span class="text-white/60 text-sm font-medium group-hover:text-white transition-colors">{t('work.viewOnTiktok')}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

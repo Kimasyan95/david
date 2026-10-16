@@ -1,0 +1,84 @@
+---
+import { useTranslations, languages, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const otherLang = lang === 'ru' ? 'en' : 'ru';
+const otherLangPath = lang === 'ru' ? '/en' : '/';
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 px-6 py-5">
+  <nav class="max-w-6xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href={lang === 'ru' ? '/' : '/en'} class="text-xl font-bold tracking-tight text-white hover:text-[#c8f65d] transition-colors duration-200">
+      Davo<span class="text-[#c8f65d]">.</span>
+    </a>
+
+    <!-- Nav links -->
+    <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-white/60">
+      <li><a href={lang === 'ru' ? '/#about' : '/en#about'} class="hover:text-white transition-colors duration-200">{t('nav.about')}</a></li>
+      <li><a href={lang === 'ru' ? '/#work' : '/en#work'} class="hover:text-white transition-colors duration-200">{t('nav.work')}</a></li>
+      <li><a href={lang === 'ru' ? '/#contact' : '/en#contact'} class="hover:text-white transition-colors duration-200">{t('nav.contact')}</a></li>
+    </ul>
+
+    <!-- Lang switcher + CTA -->
+    <div class="flex items-center gap-4">
+      <a href={otherLangPath} class="text-sm font-medium text-white/50 hover:text-white transition-colors duration-200 uppercase tracking-wider">
+        {languages[otherLang]}
+      </a>
+      <a
+        href="https://t.me/davovideo"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden md:inline-flex items-center gap-2 bg-[#c8f65d] text-black text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-[#d4ff6a] transition-colors duration-200"
+      >
+        {t('nav.contact')}
+      </a>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-btn" class="md:hidden text-white/70 hover:text-white" aria-label="Menu">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden mt-4 max-w-6xl mx-auto bg-[#111] rounded-2xl p-6 border border-white/10">
+    <ul class="flex flex-col gap-4 text-sm font-medium">
+      <li><a href={lang === 'ru' ? '/#about' : '/en#about'} class="text-white/70 hover:text-white transition-colors">{t('nav.about')}</a></li>
+      <li><a href={lang === 'ru' ? '/#work' : '/en#work'} class="text-white/70 hover:text-white transition-colors">{t('nav.work')}</a></li>
+      <li><a href={lang === 'ru' ? '/#contact' : '/en#contact'} class="text-white/70 hover:text-white transition-colors">{t('nav.contact')}</a></li>
+    </ul>
+    <a
+      href="https://t.me/davovideo"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-4 inline-flex items-center gap-2 bg-[#c8f65d] text-black text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-[#d4ff6a] transition-colors"
+    >
+      {t('nav.contact')}
+    </a>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>
+
+<style>
+  header {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: linear-gradient(to bottom, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0) 100%);
+  }
+</style>

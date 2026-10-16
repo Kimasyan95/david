@@ -1,0 +1,23 @@
+---
+import { useTranslations, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/8 px-6 py-8">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="text-white/30 text-sm">
+      © {year} Davo. {t('footer.rights')}.
+    </div>
+    <div class="text-white/20 text-xs">
+      {lang === 'ru' ? 'Сделано с' : 'Made with'} <span class="text-[#c8f65d]/60">Astro</span> + <span class="text-[#c8f65d]/60">Tailwind</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,65 @@
+---
+import { useTranslations, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="contact" class="py-24 md:py-36 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Section label -->
+    <div class="flex items-center gap-3 mb-16">
+      <span class="text-[#c8f65d] text-sm font-mono uppercase tracking-widest">04</span>
+      <span class="w-12 h-px bg-[#c8f65d]/50"></span>
+      <span class="text-white/40 text-sm uppercase tracking-widest">{t('contact.title')}</span>
+    </div>
+
+    <!-- Main CTA block -->
+    <div class="relative bg-white/3 border border-white/8 rounded-3xl p-12 md:p-20 overflow-hidden">
+      <!-- Glow -->
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-48 bg-[#c8f65d]/15 rounded-full blur-[80px] pointer-events-none"></div>
+
+      <div class="relative text-center max-w-2xl mx-auto">
+        <h2 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+          {t('contact.title')}
+        </h2>
+        <p class="text-lg text-white/50 mb-12">
+          {t('contact.subtitle')}
+        </p>
+
+        <!-- Telegram CTA -->
+        <a
+          href="https://t.me/davovideo"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 bg-[#c8f65d] text-black font-bold px-10 py-5 rounded-full text-lg hover:bg-[#d4ff6a] transition-all duration-200 hover:scale-105 shadow-[0_0_40px_rgba(200,246,93,0.3)]"
+        >
+          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/>
+          </svg>
+          {t('contact.telegram')}
+        </a>
+
+        <!-- Social links -->
+        <div class="flex items-center justify-center gap-6 mt-12 pt-12 border-t border-white/10">
+          <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-red-500 transition-colors duration-200 text-sm font-medium">
+            YouTube
+          </a>
+          <span class="text-white/20">·</span>
+          <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white transition-colors duration-200 text-sm font-medium">
+            TikTok
+          </a>
+          <span class="text-white/20">·</span>
+          <a href="https://t.me/davovideo" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-[#c8f65d] transition-colors duration-200 text-sm font-medium">
+            Telegram
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
