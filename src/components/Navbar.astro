@@ -26,10 +26,10 @@ const basePath = langPaths[lang];
 
   <!-- Nav pill centered -->
   <div class="flex items-center gap-1 bg-[var(--bg-card)] rounded-[80px] px-3 py-2">
-    <a href={basePath} class="nav-pill active">{t('nav.home')}</a>
-    <a href={`${basePath}#work`} class="nav-pill">{t('nav.work')}</a>
-    <a href={`${basePath}#about`} class="nav-pill">{t('nav.about')}</a>
-    <a href={`${basePath}#contact`} class="nav-pill">{t('nav.contact')}</a>
+    <a href={basePath} class="nav-pill" data-section="home" id="nav-home">{t('nav.home')}</a>
+    <a href={`${basePath}#work`} class="nav-pill" data-section="work">{t('nav.work')}</a>
+    <a href={`${basePath}#about`} class="nav-pill" data-section="about">{t('nav.about')}</a>
+    <a href={`${basePath}#contact`} class="nav-pill" data-section="contact">{t('nav.contact')}</a>
   </div>
 
   <!-- Theme + lang top-right absolute -->
@@ -138,5 +138,47 @@ const basePath = langPaths[lang];
 
   toggleBtn?.addEventListener('click', () => {
     setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  // Active nav tab via IntersectionObserver
+  const pills = document.querySelectorAll<HTMLElement>('.nav-pill[data-section]');
+
+  function setActive(section: string) {
+    pills.forEach(p => {
+      if (p.dataset.section === section) {
+        p.classList.add('active');
+      } else {
+        p.classList.remove('active');
+      }
+    });
+  }
+
+  const sections = [
+    { id: 'work', el: document.getElementById('work') },
+    { id: 'about', el: document.getElementById('about') },
+    { id: 'contact', el: document.getElementById('contact') },
+  ];
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setActive(entry.target.id);
+      }
+    });
+  }, { rootMargin: '-10% 0px -60% 0px', threshold: 0 });
+
+  sections.forEach(s => { if (s.el) observer.observe(s.el); });
+
+  // Default: home active on top
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 100) setActive('home');
+  }, { passive: true });
+
+  setActive('home');
+
+  // Home — scroll to top без перезагрузки
+  document.getElementById('nav-home')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
