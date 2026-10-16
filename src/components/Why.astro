@@ -1,0 +1,58 @@
+---
+import { type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const reasons = lang === 'ru' ? [
+  { num: '01', text: 'Ответственный подход к каждому проекту.' },
+  { num: '02', text: 'Внимание к деталям и качеству монтажа.' },
+  { num: '03', text: 'Индивидуальный подход к задачам клиента.' },
+  { num: '04', text: 'Готовность учитывать пожелания и вносить правки.' },
+  { num: '05', text: 'Заинтересованность не только в монтаже, но и в развитии контента клиента.' },
+] : lang === 'en' ? [
+  { num: '01', text: 'Responsible approach to every project.' },
+  { num: '02', text: 'Attention to detail and editing quality.' },
+  { num: '03', text: 'Individual approach to each client\'s needs.' },
+  { num: '04', text: 'Always open to feedback and revisions.' },
+  { num: '05', text: 'Invested not just in editing, but in growing your content.' },
+] : lang === 'ka' ? [
+  { num: '01', text: 'პასუხისმგებლური მიდგომა თითოეული პროექტისადმი.' },
+  { num: '02', text: 'ყურადღება დეტალებსა და მონტაჟის ხარისხზე.' },
+  { num: '03', text: 'ინდივიდუალური მიდგომა კლიენტის ამოცანებისადმი.' },
+  { num: '04', text: 'სურვილების გათვალისწინება და შესწორებების შეტანა.' },
+  { num: '05', text: 'დაინტერესება არა მხოლოდ მონტაჟით, არამედ კლიენტის კონტენტის განვითარებით.' },
+] : [
+  { num: '01', text: 'Պատասխանատու մոտեցում յուրաքանչյուր նախագծի նկատմամբ։' },
+  { num: '02', text: 'Ուշադրություն մանրամասներին և մոնտաժի որակին։' },
+  { num: '03', text: 'Անհատական մոտեցում հաճախորդի խնդիրներին։' },
+  { num: '04', text: 'Պատրաստ եմ հաշվի առնել ցանկությունները և կատարել փոփոխություններ։' },
+  { num: '05', text: 'Հետաքրքրված եմ ոչ միայն մոնտաժով, այլև հաճախորդի կոնտենտի զարգացմամբ։' },
+];
+
+const title = lang === 'ru' ? 'Почему я?' : lang === 'en' ? 'Why me?' : lang === 'ka' ? 'რატომ მე?' : 'Ինչու ես?';
+---
+
+<section class="py-24 md:py-36 px-6">
+  <div class="max-w-[1216px] mx-auto">
+
+    <h2 class="text-5xl md:text-6xl font-semibold text-[var(--text)] leading-tight mb-16">
+      {title}
+    </h2>
+
+    <div class="flex flex-col">
+      {reasons.map((r) => (
+        <div class="flex items-start gap-8 py-7 border-t border-[var(--border)] group">
+          <span class="text-[var(--text)] opacity-25 font-medium text-sm w-8 shrink-0 pt-1">{r.num}</span>
+          <p class="text-[var(--text)] text-2xl md:text-3xl font-semibold leading-snug group-hover:opacity-70 transition-opacity">
+            {r.text}
+          </p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
