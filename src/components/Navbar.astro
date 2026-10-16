@@ -20,12 +20,12 @@ const basePath = langPaths[lang];
 
 <header class="fixed top-0 left-0 right-0 z-50 px-6 pt-5 pb-3 flex flex-col items-center gap-4" id="main-header">
   <!-- Logo centered -->
-  <a href={basePath} class="logo-text font-semibold text-2xl tracking-tight hover:opacity-70 transition-all duration-300" id="nav-logo">
+  <a href={basePath} class="logo-text hidden md:block font-semibold text-2xl tracking-tight hover:opacity-70 transition-all duration-300" id="nav-logo">
     David Babertyan
   </a>
 
-  <!-- Nav pill centered -->
-  <div class="flex items-center gap-1 bg-[var(--bg-card)] rounded-[80px] px-3 py-2 transition-all duration-300" id="nav-pill-wrap">
+  <!-- Nav pill centered — hidden on mobile -->
+  <div class="hidden md:flex items-center gap-1 bg-[var(--bg-card)] rounded-[80px] px-3 py-2 transition-all duration-300" id="nav-pill-wrap">
     <a href={basePath} class="nav-pill" data-section="home" id="nav-home">{t('nav.home')}</a>
     <a href={`${basePath}#work`} class="nav-pill" data-section="work">{t('nav.work')}</a>
     <a href={`${basePath}#about`} class="nav-pill" data-section="about">{t('nav.about')}</a>
@@ -71,9 +71,9 @@ const basePath = langPaths[lang];
 </header>
 
 <!-- Mobile menu -->
-<div id="mobile-menu" class="hidden fixed top-24 left-4 right-4 z-40 bg-[var(--bg-card)] rounded-3xl p-6">
+<div id="mobile-menu" class="fixed top-16 left-4 right-4 z-40 bg-[var(--bg-card)] rounded-3xl p-6 menu-hidden">
   <ul class="flex flex-col gap-4 text-base font-medium mb-4">
-    <li><a href={basePath} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.home')}</a></li>
+    <li><a href={basePath} id="mobile-nav-home" class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.home')}</a></li>
     <li><a href={`${basePath}#work`} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.work')}</a></li>
     <li><a href={`${basePath}#about`} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.about')}</a></li>
     <li><a href={`${basePath}#contact`} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.contact')}</a></li>
@@ -89,15 +89,21 @@ const basePath = langPaths[lang];
   .nav-pill {
     display: inline-flex;
     align-items: center;
-    padding: 8px 18px;
+    padding: 7px 12px;
     border-radius: 48px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--text);
     opacity: 0.5;
     transition: opacity 0.2s, background-color 0.2s;
     text-decoration: none;
     white-space: nowrap;
+  }
+  @media (min-width: 640px) {
+    .nav-pill {
+      padding: 8px 18px;
+      font-size: 16px;
+    }
   }
   .nav-pill:hover { opacity: 0.8; }
   .nav-pill.active {
@@ -130,12 +136,30 @@ const basePath = langPaths[lang];
     padding-top: 4px !important;
     gap: 0 !important;
   }
+  .menu-hidden {
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .menu-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
 </style>
 
 <script>
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+  btn?.addEventListener('click', () => menu?.classList.toggle('menu-open'));
+
+  document.getElementById('mobile-nav-home')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    menu?.classList.remove('menu-open');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
   const html = document.documentElement;
   const toggleBtn = document.getElementById('theme-toggle');
