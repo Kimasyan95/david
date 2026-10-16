@@ -10,56 +10,57 @@ const t = useTranslations(lang);
 ---
 
 <section id="contact" class="py-24 md:py-36 px-6">
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-[1216px] mx-auto">
 
-    <!-- Section label -->
-    <div class="flex items-center gap-3 mb-16">
-      <span class="text-[#c8f65d] text-sm font-mono uppercase tracking-widest">04</span>
-      <span class="w-12 h-px bg-[#c8f65d]/50"></span>
-      <span class="text-white/40 text-sm uppercase tracking-widest">{t('contact.title')}</span>
+    <!-- Testimonial-style quote block (like Joey) -->
+    <div class="border-b border-[var(--border)] pb-16 mb-16">
+      <p class="text-3xl md:text-5xl font-semibold text-[var(--text)] leading-snug max-w-4xl">
+        &ldquo;{lang === 'ru'
+          ? 'Давид создаёт цепляющий контент — каждое видео смотришь до конца.'
+          : lang === 'en'
+          ? 'David creates engaging content — you watch every video to the end.'
+          : lang === 'ka'
+          ? 'დავით ქმნის მიმზიდველ კონტენტს — ყველა ვიდეოს ბოლომდე უყურებ.'
+          : 'Դավիթը ստեղծում է գրավիչ կոնտենտ — յուրաքանչյուր վիդեո դիտում ես մինչև վերջ։'}&rdquo;
+      </p>
     </div>
 
-    <!-- Main CTA block -->
-    <div class="relative bg-white/3 border border-white/8 rounded-3xl p-12 md:p-20 overflow-hidden">
-      <!-- Glow -->
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-48 bg-[#c8f65d]/15 rounded-full blur-[80px] pointer-events-none"></div>
+    <!-- Let's Talk block -->
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
 
-      <div class="relative text-center max-w-2xl mx-auto">
-        <h2 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
-          {t('contact.title')}
-        </h2>
-        <p class="text-lg text-white/50 mb-12">
-          {t('contact.subtitle')}
-        </p>
-
-        <!-- Telegram CTA -->
+      <div>
+        <p class="text-[var(--text)] opacity-50 font-medium text-lg mb-2">{t('contact.subtitle')}</p>
         <a
           href="https://t.me/davovideo"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-3 bg-[#c8f65d] text-black font-bold px-10 py-5 rounded-full text-lg hover:bg-[#d4ff6a] transition-all duration-200 hover:scale-105 shadow-[0_0_40px_rgba(200,246,93,0.3)]"
+          class="inline-flex items-center gap-3 bg-[var(--bg-card)] text-[var(--text)] font-semibold px-8 py-5 rounded-full text-lg hover:opacity-70 transition-opacity mt-4"
         >
-          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/>
           </svg>
           {t('contact.telegram')}
         </a>
+      </div>
 
-        <!-- Social links -->
-        <div class="flex items-center justify-center gap-6 mt-12 pt-12 border-t border-white/10">
-          <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-red-500 transition-colors duration-200 text-sm font-medium">
-            YouTube
-          </a>
-          <span class="text-white/20">·</span>
-          <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-white transition-colors duration-200 text-sm font-medium">
-            TikTok
-          </a>
-          <span class="text-white/20">·</span>
-          <a href="https://t.me/davovideo" target="_blank" rel="noopener noreferrer" class="text-white/30 hover:text-[#c8f65d] transition-colors duration-200 text-sm font-medium">
-            Telegram
-          </a>
-        </div>
+      <!-- Social links -->
+      <div class="flex items-center gap-8">
+        <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"
+          class="flex items-center gap-2 text-[var(--text)] opacity-40 hover:opacity-100 transition-opacity font-semibold text-lg">
+          YouTube
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/>
+          </svg>
+        </a>
+        <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer"
+          class="flex items-center gap-2 text-[var(--text)] opacity-40 hover:opacity-100 transition-opacity font-semibold text-lg">
+          TikTok
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/>
+          </svg>
+        </a>
       </div>
     </div>
+
   </div>
 </section>

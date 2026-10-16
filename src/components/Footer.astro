@@ -11,13 +11,47 @@ const t = useTranslations(lang);
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-white/8 px-6 py-8">
-  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div class="text-white/30 text-sm">
-      © {year} Davo. {t('footer.rights')}.
+<!-- Big "Let's talk!" footer like Joey -->
+<footer class="px-6 pb-10 pt-0">
+  <div class="max-w-[1216px] mx-auto">
+
+    <!-- Giant CTA text -->
+    <div class="relative border-t border-[var(--border)] pt-16 pb-16 flex items-end justify-between overflow-hidden">
+      <h2 class="footer-title font-semibold leading-none text-[var(--text)] tracking-tight">
+        {lang === 'ru' ? 'Давай\nработать!' : lang === 'en' ? "Let's\ntalk!" : lang === 'ka' ? 'ვიმუშ\nაოთ!' : 'Ե\u056f\u0561\u056c\u0569 \u0561\u0577\u056d!\u0561\u057f\u0587!'}
+      </h2>
+
+      <!-- Pill CTA button (like Joey's "SCROLL DOWN" pill) -->
+      <a
+        href="https://t.me/davovideo"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden md:inline-flex items-center gap-3 bg-[var(--bg-card)] text-[var(--text)] font-semibold px-8 py-6 rounded-full text-lg hover:opacity-70 transition-opacity self-end mb-2 shrink-0"
+      >
+        Telegram
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/>
+        </svg>
+      </a>
     </div>
-    <div class="text-white/20 text-xs">
-      {lang === 'ru' ? 'Сделано с' : 'Made with'} <span class="text-[#c8f65d]/60">Astro</span> + <span class="text-[#c8f65d]/60">Tailwind</span>
+
+    <!-- Bottom bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-[var(--border)]">
+      <div class="text-[var(--text)] opacity-30 text-sm font-medium">
+        {year} © — Davo
+      </div>
+      <div class="text-[var(--text)] opacity-20 text-xs">
+        {lang === 'ru' ? 'Сделано с' : 'Made with'} <span class="opacity-80">Astro</span>
+      </div>
     </div>
+
   </div>
 </footer>
+
+<style>
+  .footer-title {
+    font-size: clamp(72px, 12vw, 180px);
+    white-space: pre-line;
+    line-height: 0.9;
+  }
+</style>
