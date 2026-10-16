@@ -16,7 +16,7 @@ const t = useTranslations(lang);
     <div class="relative flex-1 flex flex-col justify-center">
       <h1 class="hero-title font-semibold leading-none tracking-tight text-[var(--text)]">
         {t('hero.name')}<br/>
-        {t('hero.role')}
+        <span class={lang === 'ru' ? 'hero-role-ru' : ''}>{t('hero.role')}</span>
       </h1>
 
       <!-- SCROLL DOWN pill — positioned to the right, vertically centered on second line -->
@@ -57,6 +57,10 @@ const t = useTranslations(lang);
   .hero-title {
     font-size: clamp(72px, 14.5vw, 215px);
     line-height: 0.9;
+  }
+
+  .hero-role-ru {
+    font-size: clamp(58px, 12.2vw, 178px);
   }
 
   /* Position scroll pill: absolute right, vertically on second line of title */
