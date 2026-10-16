@@ -19,7 +19,7 @@ export const translations = {
     },
     hero: {
       greeting: 'Hi, I\'m',
-      name: 'David Babertyan',
+      name: 'David Babercyan',
       role: 'Video Editor',
       tagline: 'I\'m a video editor helping creators, bloggers and businesses produce quality video content for social media.',
       cta: 'See My Work',
@@ -27,7 +27,7 @@ export const translations = {
     },
     about: {
       title: 'About Me',
-      subtitle: 'David Babertyan — Video Editor',
+      subtitle: 'David Babercyan — Video Editor',
       p1: 'YouTube editing — long-form videos, reviews, entertainment and educational content that keeps viewers until the end.',
       p2: 'YouTube Shorts & TikTok — dynamic short-form content with effects, subtitles and sound design that drives engagement.',
       p3: 'Thumbnail creation — eye-catching YouTube covers that stand out and make viewers click.',
