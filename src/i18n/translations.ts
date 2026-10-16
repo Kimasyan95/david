@@ -19,7 +19,7 @@ export const translations = {
     },
     hero: {
       greeting: 'Hi, I\'m',
-      name: 'David',
+      name: 'David Babertyan',
       role: 'Video Editor',
       tagline: 'I create engaging videos with dynamic subtitles and sharp editing that capture attention from the first second.',
       cta: 'See My Work',
@@ -62,9 +62,9 @@ export const translations = {
     },
     hero: {
       greeting: 'Привет, я',
-      name: 'Давид',
+      name: 'Давид Баберцян',
       role: 'Видеомонтажёр',
-      tagline: 'Помогаю авторам, блогерам и бизнесу создавать видеоконтент, который удерживает аудиторию и помогает каналу расти.',
+      tagline: 'Я видеомонтажёр, который помогает авторам, блогерам и бизнесу создавать качественный видеоконтент для социальных сетей.',
       cta: 'Смотреть работы',
       contact: 'Написать мне',
     },
@@ -105,7 +105,7 @@ export const translations = {
     },
     hero: {
       greeting: 'გამარჯობა, მე ვარ',
-      name: 'დავით',
+      name: 'დავით ბაბერციანი',
       role: 'ვიდეო მონტაჟიორი',
       tagline: 'ვქმნი მიმზიდველ ვიდეოებს დინამიური სუბტიტრებითა და მკვეთრი მონტაჟით, რომლებიც პირველივე წამიდან იპყრობს ყურადღებას.',
       cta: 'ნამუშევრების ნახვა',
@@ -148,7 +148,7 @@ export const translations = {
     },
     hero: {
       greeting: 'Բարև, ես եմ',
-      name: 'Դավիթ',
+      name: 'Դավիթ Բաբերցյան',
       role: 'Վիդեո մոնտաժ',
       tagline: 'Ստեղծում եմ գրավիչ տեսանյութեր դինամիկ ենթագրերով և ճշգրիտ մոնտաժով, որոնք ուշադրություն են գրավում առաջին վայրկյանից։',
       cta: 'Տեսնել աշխատանքները',
