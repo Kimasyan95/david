@@ -30,6 +30,15 @@ const t = useTranslations(lang);
 
       <div>
         <p class="text-[var(--text)] opacity-50 font-medium text-lg mb-2">{t('contact.subtitle')}</p>
+        <p class="text-[var(--text)] opacity-30 font-medium text-base mb-4">
+          {lang === 'ru'
+            ? 'Открыт к сотрудничеству с блогерами, YouTube-каналами и бизнесом'
+            : lang === 'en'
+            ? 'Open to work with bloggers, YouTube channels and businesses'
+            : lang === 'ka'
+            ? 'მზად ვარ ბლოგერებთან, YouTube-არხებთან და ბიზნესებთან თანამშრომლობისთვის'
+            : 'Բաց եմ բլոգերների, YouTube-ալիքների և բիզնեսի հետ համագործակցության համար'}
+        </p>
         <a
           href="https://t.me/davovideo"
           target="_blank"
