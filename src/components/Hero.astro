@@ -9,37 +9,45 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section class="relative min-h-screen flex flex-col justify-between px-6 pt-36 pb-10 overflow-hidden">
-  <div class="max-w-[1216px] mx-auto w-full flex flex-col flex-1">
+<section class="relative min-h-screen flex flex-col px-6 overflow-hidden" style="padding-top: 120px;">
+  <div class="max-w-[1440px] mx-auto w-full flex flex-col flex-1">
 
-    <!-- Top row: intro text + scroll button -->
-    <div class="flex items-start justify-between mb-8">
-      <div class="flex flex-col gap-2">
-        <p class="text-[var(--text)] opacity-50 text-lg font-medium">
-          {lang === 'ru' ? 'Привет, я Давид' : lang === 'en' ? "Hi, I'm David" : lang === 'ka' ? 'გამარჯობა, მე ვარ დავით' : 'Բարև, ես եմ Դավիթ'}
-        </p>
-        <p class="text-[var(--text)] text-lg font-medium max-w-sm opacity-80">
-          {t('hero.tagline')}
-        </p>
-      </div>
+    <!-- Big title + SCROLL DOWN pill on the right aligned to second line -->
+    <div class="relative flex-1 flex flex-col justify-center">
+      <h1 class="hero-title font-semibold leading-none tracking-tight text-[var(--text)]">
+        {t('hero.name')}<br/>
+        {t('hero.role')}
+      </h1>
 
-      <!-- Scroll down pill -->
-      <a href="#work" class="hidden md:flex items-center gap-3 bg-[var(--bg-card)] rounded-full px-7 py-6 hover:opacity-70 transition-opacity mt-1">
-        <span class="text-[var(--text)] font-semibold text-lg uppercase tracking-wide">
-          {lang === 'ru' ? 'Смотреть' : lang === 'en' ? 'Scroll' : lang === 'ka' ? 'ნახვა' : 'Տեսնել'}
+      <!-- SCROLL DOWN pill — positioned to the right, vertically centered on second line -->
+      <a
+        href="#work"
+        class="scroll-pill hidden md:flex items-center gap-3 bg-[var(--bg-card)] rounded-full px-7 py-5 hover:opacity-70 transition-opacity"
+      >
+        <span class="text-[var(--text)] font-semibold text-base uppercase tracking-widest whitespace-nowrap">
+          {lang === 'ru' ? 'Смотреть' : 'Scroll Down'}
         </span>
-        <svg width="14" height="16" fill="none" viewBox="0 0 14 16" class="text-[var(--text)] opacity-60">
-          <path d="M7 1v12M1 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg width="13" height="15" fill="none" viewBox="0 0 13 15" class="text-[var(--text)]">
+          <path d="M6.5 1v11M1 9l5.5 5.5L12 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
     </div>
 
-    <!-- Big hero text -->
-    <div class="flex-1 flex flex-col justify-end pb-4">
-      <h1 class="hero-title font-semibold leading-none tracking-tight text-[var(--text)]">
-        {t('hero.name')}<span class="opacity-30">&</span><br/>
-        {t('hero.role')}
-      </h1>
+    <!-- Bottom row: Let's Talk left | description right -->
+    <div class="flex items-start justify-between py-8 border-[var(--border)] mt-auto">
+      <div>
+        <p class="text-[var(--text)] font-semibold text-lg mb-1">
+          {lang === 'ru' ? 'Написать мне' : lang === 'en' ? "Let's Talk" : lang === 'ka' ? 'დამიკავშირდი' : 'Կապ հաստատել'}
+        </p>
+        <a href="https://t.me/davovideo" target="_blank" rel="noopener noreferrer"
+          class="text-[var(--text)] opacity-40 hover:opacity-80 transition-opacity text-sm font-medium">
+          t.me/davovideo
+        </a>
+      </div>
+
+      <p class="text-[var(--text)] opacity-50 text-base font-medium leading-relaxed max-w-sm text-right">
+        {t('hero.tagline')}
+      </p>
     </div>
 
   </div>
@@ -47,7 +55,16 @@ const t = useTranslations(lang);
 
 <style>
   .hero-title {
-    font-size: clamp(72px, 14vw, 210px);
-    line-height: 0.92;
+    font-size: clamp(72px, 14.5vw, 215px);
+    line-height: 0.9;
+  }
+
+  /* Position scroll pill: absolute right, vertically on second line of title */
+  .scroll-pill {
+    position: absolute;
+    right: 0;
+    /* Align to bottom half of the title (second line) */
+    bottom: 0;
+    transform: translateY(-10%);
   }
 </style>

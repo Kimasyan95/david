@@ -18,115 +18,104 @@ const langPaths: Record<Lang, string> = {
 const basePath = langPaths[lang];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 px-6 py-6">
-  <nav class="max-w-[1216px] mx-auto flex items-center justify-between">
-    <!-- Logo -->
-    <a href={basePath} class="text-[var(--text)] font-semibold text-xl tracking-tight hover:opacity-70 transition-opacity duration-200">
-      David<span class="opacity-40">.</span>
-    </a>
+<header class="fixed top-0 left-0 right-0 z-50 px-6 pt-5 pb-3 flex flex-col items-center gap-6">
+  <!-- Logo centered -->
+  <a href={basePath} class="text-[var(--text)] font-semibold text-2xl tracking-tight hover:opacity-70 transition-opacity">
+    David<sup class="text-2xl">®</sup>
+  </a>
 
-    <!-- Center nav pill -->
-    <div class="hidden md:flex items-center gap-1 bg-[var(--bg-card)] rounded-[80px] px-3 py-3">
-      <a href={basePath} class="nav-pill active">{t('nav.home')}</a>
-      <a href={`${basePath}#work`} class="nav-pill">{t('nav.work')}</a>
-      <a href={`${basePath}#about`} class="nav-pill">{t('nav.about')}</a>
-      <a href={`${basePath}#contact`} class="nav-pill">{t('nav.contact')}</a>
-    </div>
+  <!-- Nav pill centered -->
+  <div class="flex items-center gap-1 bg-[var(--bg-card)] rounded-[80px] px-3 py-2">
+    <a href={basePath} class="nav-pill active">{t('nav.home')}</a>
+    <a href={`${basePath}#work`} class="nav-pill">{t('nav.work')}</a>
+    <a href={`${basePath}#about`} class="nav-pill">{t('nav.about')}</a>
+    <a href={`${basePath}#contact`} class="nav-pill">{t('nav.contact')}</a>
+  </div>
 
-    <!-- Right side: lang + theme toggle -->
-    <div class="flex items-center gap-4">
-      <!-- Lang switcher -->
-      <div class="hidden md:flex items-center gap-3">
-        {Object.entries(languages).map(([code, label]) => (
-          <a
-            href={langPaths[code as Lang]}
-            class={`text-xs font-semibold uppercase tracking-wider transition-opacity duration-200 ${
-              code === lang
-                ? 'text-[var(--text)] opacity-100'
-                : 'text-[var(--text)] opacity-30 hover:opacity-70'
-            }`}
-          >
-            {label}
-          </a>
-        ))}
-      </div>
-
-      <!-- Theme toggle -->
-      <button id="theme-toggle" class="w-10 h-10 rounded-full bg-[var(--bg-card)] flex items-center justify-center hover:opacity-70 transition-opacity" aria-label="Toggle theme">
-        <span id="theme-icon-dark" class="text-[var(--text)]">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-          </svg>
-        </span>
-        <span id="theme-icon-light" class="text-[var(--text)] hidden">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-          </svg>
-        </span>
-      </button>
-
-      <!-- Mobile menu button -->
-      <button id="mobile-menu-btn" class="md:hidden text-[var(--text)] opacity-70 hover:opacity-100" aria-label="Menu">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden md:hidden mt-4 max-w-[1216px] mx-auto bg-[var(--bg-card)] rounded-3xl p-6">
-    <ul class="flex flex-col gap-4 text-sm font-medium mb-4">
-      <li><a href={basePath} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.home')}</a></li>
-      <li><a href={`${basePath}#work`} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.work')}</a></li>
-      <li><a href={`${basePath}#about`} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.about')}</a></li>
-      <li><a href={`${basePath}#contact`} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.contact')}</a></li>
-    </ul>
-    <div class="flex gap-4 pt-4 border-t border-[var(--border)]">
+  <!-- Theme + lang top-right absolute -->
+  <div class="absolute top-5 right-6 flex items-center gap-3">
+    <div class="hidden md:flex items-center gap-3">
       {Object.entries(languages).map(([code, label]) => (
         <a
           href={langPaths[code as Lang]}
-          class={`text-xs font-semibold uppercase tracking-wider transition-opacity ${
-            code === lang ? 'text-[var(--text)]' : 'text-[var(--text)] opacity-30'
+          class={`text-xs font-semibold uppercase tracking-wider transition-opacity duration-200 ${
+            code === lang
+              ? 'text-[var(--text)] opacity-100'
+              : 'text-[var(--text)] opacity-30 hover:opacity-70'
           }`}
         >
           {label}
         </a>
       ))}
     </div>
+    <button id="theme-toggle" class="w-9 h-9 rounded-full bg-[var(--bg-card)] flex items-center justify-center hover:opacity-70 transition-opacity" aria-label="Toggle theme">
+      <span id="theme-icon-dark" class="text-[var(--text)]">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </span>
+      <span id="theme-icon-light" class="text-[var(--text)] hidden">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+      </span>
+    </button>
+
+    <!-- Mobile hamburger -->
+    <button id="mobile-menu-btn" class="md:hidden text-[var(--text)] opacity-70 hover:opacity-100" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
   </div>
 </header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="hidden fixed top-24 left-4 right-4 z-40 bg-[var(--bg-card)] rounded-3xl p-6">
+  <ul class="flex flex-col gap-4 text-base font-medium mb-4">
+    <li><a href={basePath} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.home')}</a></li>
+    <li><a href={`${basePath}#work`} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.work')}</a></li>
+    <li><a href={`${basePath}#about`} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.about')}</a></li>
+    <li><a href={`${basePath}#contact`} class="text-[var(--text)] opacity-70 hover:opacity-100 transition-opacity">{t('nav.contact')}</a></li>
+  </ul>
+  <div class="flex gap-4 pt-4 border-t border-[var(--border)]">
+    {Object.entries(languages).map(([code, label]) => (
+      <a href={langPaths[code as Lang]} class={`text-xs font-semibold uppercase tracking-wider ${code === lang ? 'text-[var(--text)]' : 'text-[var(--text)] opacity-30'}`}>{label}</a>
+    ))}
+  </div>
+</div>
 
 <style>
   .nav-pill {
     display: inline-flex;
     align-items: center;
-    padding: 10px 22px;
+    padding: 8px 18px;
     border-radius: 48px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--text);
     opacity: 0.5;
     transition: opacity 0.2s, background-color 0.2s;
     text-decoration: none;
+    white-space: nowrap;
   }
-  .nav-pill:hover {
-    opacity: 0.8;
-  }
+  .nav-pill:hover { opacity: 0.8; }
   .nav-pill.active {
     background-color: var(--text);
     color: var(--bg);
     opacity: 1;
   }
+  header {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 </style>
 
 <script>
-  // Mobile menu
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
 
-  // Theme toggle
   const html = document.documentElement;
   const toggleBtn = document.getElementById('theme-toggle');
   const iconDark = document.getElementById('theme-icon-dark');
@@ -144,21 +133,10 @@ const basePath = langPaths[lang];
     }
   }
 
-  // Init from localStorage
   const saved = localStorage.getItem('theme') || 'dark';
   setTheme(saved);
 
   toggleBtn?.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  });
-
-  // Active nav link
-  const navPills = document.querySelectorAll('.nav-pill');
-  navPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      navPills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-    });
+    setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 </script>
