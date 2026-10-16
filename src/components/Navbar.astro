@@ -18,14 +18,14 @@ const langPaths: Record<Lang, string> = {
 const basePath = langPaths[lang];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 px-6 pt-5 pb-3 flex flex-col items-center gap-6">
+<header class="fixed top-0 left-0 right-0 z-50 px-6 pt-5 pb-3 flex flex-col items-center gap-3" id="main-header">
   <!-- Logo centered -->
-  <a href={basePath} class="logo-text font-semibold text-2xl tracking-tight hover:opacity-70 transition-opacity">
+  <a href={basePath} class="logo-text font-semibold text-2xl tracking-tight hover:opacity-70 transition-all duration-300" id="nav-logo">
     David<span style="vertical-align: 0.3em;">®</span>
   </a>
 
   <!-- Nav pill centered -->
-  <div class="flex items-center gap-1 bg-[var(--bg-card)] rounded-[80px] px-3 py-2">
+  <div class="flex items-center gap-1 bg-[var(--bg-card)] rounded-[80px] px-3 py-2 transition-all duration-300" id="nav-pill-wrap">
     <a href={basePath} class="nav-pill" data-section="home" id="nav-home">{t('nav.home')}</a>
     <a href={`${basePath}#work`} class="nav-pill" data-section="work">{t('nav.work')}</a>
     <a href={`${basePath}#about`} class="nav-pill" data-section="about">{t('nav.about')}</a>
@@ -114,6 +114,21 @@ const basePath = langPaths[lang];
       0 0 20px var(--bg),
       0 0 12px var(--bg),
       0 0 6px var(--bg);
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .logo-hidden {
+    opacity: 0 !important;
+    transform: translateY(-10px) !important;
+    pointer-events: none;
+  }
+  header {
+    transition: padding-top 0.3s ease, gap 0.3s ease;
+  }
+  .header-compact {
+    padding-top: 4px !important;
+    gap: 0 !important;
   }
 </style>
 
@@ -187,4 +202,21 @@ const basePath = langPaths[lang];
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  // Logo hide + nav slide up on scroll
+  const logo = document.getElementById('nav-logo');
+  const header = document.getElementById('main-header');
+  let scrolled = false;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60 && !scrolled) {
+      scrolled = true;
+      logo?.classList.add('logo-hidden');
+      header?.classList.add('header-compact');
+    } else if (window.scrollY <= 60 && scrolled) {
+      scrolled = false;
+      logo?.classList.remove('logo-hidden');
+      header?.classList.remove('header-compact');
+    }
+  }, { passive: true });
 </script>
