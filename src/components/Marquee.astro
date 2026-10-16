@@ -1,0 +1,42 @@
+---
+import { type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const text = lang === 'ru'
+  ? 'Видеомонтаж · Динамичные субтитры · YouTube · TikTok · CapCut · Цветокоррекция · Саунд-дизайн · '
+  : lang === 'en'
+  ? 'Video Editing · Dynamic Subtitles · YouTube · TikTok · CapCut · Color Grading · Sound Design · '
+  : lang === 'ka'
+  ? 'ვიდეო მონტაჟი · სუბტიტრები · YouTube · TikTok · CapCut · '
+  : 'Վիդեո մոնտաժ · Ենթագրեր · YouTube · TikTok · CapCut · ';
+---
+
+<div class="marquee-wrapper overflow-hidden py-6 border-t border-b border-[var(--border)] my-0">
+  <div class="marquee-track flex whitespace-nowrap">
+    {Array.from({ length: 6 }).map(() => (
+      <span class="marquee-item text-[var(--text)] font-semibold text-4xl md:text-5xl opacity-90 shrink-0 pr-0">
+        {text}
+      </span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee-track {
+    animation: marquee 6s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+  }
+</style>
