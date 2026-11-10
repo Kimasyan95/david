@@ -45,6 +45,17 @@ const youtubeVideos = [
     thumb: 'https://i.ytimg.com/vi/9wJwxw5u3V8/maxresdefault.jpg',
     title: 'Video 4',
   },
+  {
+    id: 'GQt3mHIeA8I',
+    url: 'https://youtu.be/GQt3mHIeA8I',
+    thumb: 'https://i.ytimg.com/vi/GQt3mHIeA8I/maxresdefault.jpg',
+    title: 'Video 5',
+  },
+];
+
+const youtubeShorts = [
+  { id: 'kY4oOPfjSW0', thumb: 'https://i.ytimg.com/vi/kY4oOPfjSW0/hqdefault.jpg', title: 'Short 1' },
+  { id: 'a5TPLCkWreE', thumb: 'https://i.ytimg.com/vi/a5TPLCkWreE/hqdefault.jpg', title: 'Short 2' },
 ];
 
 const tiktokVideos = [
@@ -111,8 +122,38 @@ const tiktokVideos = [
       ))}
     </div>
 
-    <!-- TikTok cards: 2 columns, portrait -->
-    <div class="grid grid-cols-2 gap-6 max-w-md">
+    <!-- Shorts + TikTok cards: portrait -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {youtubeShorts.map((video) => (
+        <div
+          class="yt-card group relative aspect-[9/16] rounded-[32px] overflow-hidden bg-[var(--bg-card)] cursor-pointer"
+          data-id={video.id}
+        >
+          <div class="yt-thumb absolute inset-0">
+            <img
+              src={video.thumb}
+              alt={video.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/40 transition-colors">
+                <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <iframe
+            class="yt-iframe absolute inset-0 w-full h-full hidden"
+            src=""
+            data-src={`https://www.youtube.com/embed/${video.id}?autoplay=1`}
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+          ></iframe>
+        </div>
+      ))}
       {tiktokVideos.map((video) => (
         <a
           href={video.url}
